@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-top: 5px;
+    font-size: 60px;
+
+    color: rgb(36, 8, 3);
+}
+
+#buttonAddBook,
+#buttonShowBooks {
+    margin: 7px;
+    min-height: 20px;
+    min-width: 130px;
+    font-size: 18px;
+    border: 2.5px solid rgb(36, 8, 3);
+    border-radius: 4.5px;
+
+    background-color: rgb(95, 55, 48);
+    color: rgb(238, 179, 169);
+        
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#bookList {
+    display: flex;
+    
+    margin: 5px;
+}
+
+.bookContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    padding: 5px;
+    border: 5px solid rgb(36, 8, 3);
+    border-radius: 5px;
+
+    background-color: rgb(238, 179, 169);
+    color: rgb(36, 8, 3);
+    }
+
+#hidden {
+    display: hidden;
+}
+
+.readButton,
+.removeButton {
+    padding: 5px;
+    border: 3px solid rgb(36, 8, 3);
+    border-radius: 5px;
+    background-color: rgb(95, 55, 48);
+    color: rgb(238, 179, 169);
+    font-weight: 570;
+}
+
+.removeButton {
+    margin: 3px;
+    margin-left: 0px;
+}
