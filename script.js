@@ -6,49 +6,64 @@ let enterInfo = document.forms[0];
 let counter = 0;
 
 class Book {
-    constructor(name, author, readState) {
+    constructor(name, author, read) {
         this.name = name;
         this.author = author;
-        this.readState = readState;
+        this.read = read;
     }
-    changeReadState() {
-        if (this.readState = 'Not Read') this.readState = 'Read';
-        else this.readState = 'Not Read';
-    }    
 };
+
+function readState(state) {
+    state == false ? 'Not Read' : 'Read';
+}    
 
 function render() {
     bookContainer.innerHTML = '';
     bookList.forEach((book) => {        
 
-        container = document.createElement('div');        
-        bookContainer.append(container);
-        container.className = 'bookContainer';
-            title = document.createElement('h3');
-            title.innerHTML = book.name;
-            container.append(title);
+        book.container = document.createElement('div');        
+        bookContainer.append(book.container);
+        book.container.className = 'bookContainer';
+            book.titleRender = document.createElement('h3');
+            book.titleRender.innerHTML = book.name;
+            book.container.append(book.titleRender);
             
-            author = document.createElement('h3');
-            author.innerHTML = book.author;
-            container.append(author);
+            book.writerRender = document.createElement('h3');
+            book.writerRender.innerHTML = book.author;
+            book.container.append(book.author);
 
-            readButton = document.createElement('button')
-            readButton.innerHTML = book.readState;
-            container.append(readButton);
-            readButton.className = 'readButton';
-            readButton.id = 'readButton' + bookList.indexOf(book);
+            book.readButton = document.createElement('button')
+            book.read == false ? 
+                book.readButton.innerHTML = 'Not Read'
+                :
+                book.readButton.innerHTML = 'Read'
+            book.container.append(book.readButton);
+            book.readButton.className = 'readButton';
+            book.readButton.id = 'readButton' + bookList.indexOf(book);
             document.getElementById('readButton' + bookList.indexOf(book)).addEventListener('click', e => {
                 e.stopPropagation;
-                book.changeReadState();
+                console.log(book.read)
+                if (book.read == false) {
+                    book.read = true;
+                }
+                else {
+                    book.read = false;
+                }
                 console.log('button still works');
                 render();
             });
 
-            removeButton = document.createElement('button')       
-            removeButton.innerHTML = 'Remove Book';        
-            container.append(removeButton);
-            removeButton.className = 'removeButton';        
-    });
+            book.removeButton = document.createElement('button')       
+            book.removeButton.innerHTML = 'Remove Book';        
+            book.container.append(book.removeButton);
+            book.removeButton.className = 'removeButton';        
+            book.removeButton.id = 'removeButton' + bookList.indexOf(book);
+            document.getElementById('removeButton' + bookList.indexOf(book)).addEventListener('click', e => {
+                e.stopPropagation();
+                bookList.splice(bookList.indexOf(book), 1);
+                render();
+            })
+        });
 }
 
 function clearForm() {
@@ -58,7 +73,7 @@ function clearForm() {
 
 document.getElementById('enterInfo').addEventListener('submit', e => {
     e.preventDefault();
-    const addedBook = new Book(getTitle.value, getAuthor.value, 'Not Read');
+    const addedBook = new Book(getTitle.value, getAuthor.value, false);
     bookList.push(addedBook);
     render();
     clearForm();
